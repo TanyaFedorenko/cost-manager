@@ -8,6 +8,7 @@ type CostItemProps = {
   amount: number;
 };
 
+
 export const CostItem = ({ date, description, amount }: CostItemProps) => {
     const month = date.toLocaleDateString('ru-RU', {month: "long"} );
     const year = date.getFullYear();
