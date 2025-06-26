@@ -1,4 +1,5 @@
-import { CostItem } from "./components/CostItem";
+
+import {Cost} from "./components/Cost/Cost";
 
 function App() {
   const COSTS = [
@@ -24,9 +25,8 @@ function App() {
   return (
     <>
       <h1>Start learning React</h1>
-      <CostItem date = {COSTS[0].date} description ={COSTS[0].description} amount ={COSTS[0].amount} />
-      <CostItem date = {COSTS[1].date} description ={COSTS[1].description} amount ={COSTS[1].amount} />
-      <CostItem date = {COSTS[2].date} description ={COSTS[2].description} amount ={COSTS[2].amount} />
+      <Cost costs = {COSTS}></Cost>
+
     </>
   );
 }
