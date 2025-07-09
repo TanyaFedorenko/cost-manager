@@ -1,5 +1,5 @@
 import "./Costs.css";
-import { CostItem } from "./CostItem";
+import { CostItem } from "../CostItem/CostItem";
 import {Card} from '../UI/Card';
 type Cost = {
   id: string;
