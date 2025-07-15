@@ -1,10 +1,21 @@
 import "./NewCost.css";
 import { CostForm } from "./CostForm/CostForm";
+import type { UserInput } from "./UserInput";
+type NewCostProps = {
+  onAddCost: (post: UserInput) => void;
+};
+export const NewCost = ({ onAddCost}: NewCostProps) => {
+  const saveCostDateHandler = (inputConstDate: UserInput) => {
 
-export const NewCost = () => {
+    const costDate = {
+      ...inputConstDate,
+      id: Math.random().toString()
+    };
+     onAddCost(costDate);
+  };
   return (
     <div className="new-cost">
-      <CostForm></CostForm>;
+      <CostForm onSaveCostData={saveCostDateHandler}></CostForm>;
     </div>
-  )
+  );
 };

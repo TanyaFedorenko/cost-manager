@@ -1,36 +1,102 @@
 import "./CostForm.css";
-import React, {useState} from "react";
+import React, { useState } from "react";
+import type { UserInput } from "../UserInput";
 
-export const CostForm = () => {
+type CostFormProps = {
+  onSaveCostData: (inputData: UserInput) => void;
+};
 
-  const [name, setName] = useState<string>('');
-    const getInputValue = (event:React.ChangeEvent<HTMLInputElement>)=>{
-         setName(event.target.value)
-    }
-    const [sum, setSum] = useState<string>('');
-    const getInputValueSum = (event:React.ChangeEvent<HTMLInputElement>)=>{
-         setSum(event.target.value)
-    }
-    const [date, setDate] = useState<string>('');
-    const getInputValueDate = (event:React.ChangeEvent<HTMLInputElement>)=>{
-         setDate(event.target.value)
-    }
+export const CostForm = ({ onSaveCostData }: CostFormProps) => {
+  // const [name, setName] = useState<string>("");
+  // const [amount, setAmount] = useState<string>("");
+  // const [date, setDate] = useState<string>("");
 
+  const [userInput, setUserInput] = useState<UserInput>({
+    name: "",
+    amount: "",
+    date: new Date(),
+  });
+
+  const nameChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+    // setName(event.target.value);
+    // setUserInput({
+    //   ...userInput,
+    //   name: event.target.value,
+    // });
+    setUserInput((previousState: UserInput) => {
+      return {
+        ...previousState,
+        name: event.target.value,
+      };
+    });
+  };
+
+  const amountChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setUserInput((previousState: UserInput) => {
+      return {
+        ...previousState,
+        amount: event.target.value,
+      };
+    });
+  };
+
+  const dateChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setUserInput((previousValue) => {
+      return {
+        ...previousValue,
+        date: new Date(event.target.value),
+      };
+    });
+  };
+
+  const submitHandler = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const { date } = userInput;
+    const costDate: UserInput = {
+      ...userInput,
+      date: new Date(date),
+    };
+    onSaveCostData(costDate);
+
+    setUserInput(() => {
+      return {
+        name:"",
+        amount:"",
+        date: new Date(),
+      };
+    });
+  };
 
   return (
     <div>
-      <form action="" className="new-cost__controls">
+      <form onSubmit={submitHandler} action="" className="new-cost__controls">
         <div className="new-cost__control">
           <label htmlFor="">Name</label>
-          <input type="text"  onChange={getInputValue}/>
+          <input
+            value={userInput.name}
+            type="text"
+            onChange={nameChangeHandler}
+          />
         </div>
         <div className="new-cost__control">
           <label htmlFor="">Sum</label>
-          <input type="number" min="0.01" step="0.01" onChange={getInputValueSum}/>
+          <input
+            value={userInput.amount}
+            type="number"
+            min="0.01"
+            step="0.01"
+            onChange={amountChangeHandler}
+          />
         </div>
         <div className="new-cost__control">
           <label htmlFor="">Date</label>
-          <input type="date" min="2019-01-01" step="2022-12-31" onChange={getInputValue} />
+          <input
+            value={userInput.date.toISOString().split("T")[0]}
+            type="date"
+            min="2019-01-01"
+            step="2022-12-31"
+            onChange={dateChangeHandler}
+          />
         </div>
         <div className="new-cost__actions">
           <button type="submit">Add</button>

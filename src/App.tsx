@@ -1,6 +1,6 @@
-
-import {Cost} from "./components/Cost/Cost";
+import { Cost } from "./components/Cost/Cost";
 import { NewCost } from "./components/NewCost/NewCost";
+import type { UserInput } from "./components/NewCost/UserInput";
 
 function App() {
   const COSTS = [
@@ -23,13 +23,16 @@ function App() {
       amount: 49.99,
     },
   ];
-  return (
-    <>
-    <NewCost></NewCost>
+  const addCostHandler = (post: UserInput) => {
+    console.log(post);
  
-      <Cost costs = {COSTS}></Cost>
+  };
+  return (
+    <div>
+      <NewCost onAddCost={addCostHandler}></NewCost>
 
-    </>
+      <Cost costs={COSTS}></Cost>
+    </div>
   );
 }
 
