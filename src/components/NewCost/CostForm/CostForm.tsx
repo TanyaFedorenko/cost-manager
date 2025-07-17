@@ -12,9 +12,10 @@ export const CostForm = ({ onSaveCostData }: CostFormProps) => {
   // const [date, setDate] = useState<string>("");
 
   const [userInput, setUserInput] = useState<UserInput>({
-    name: "",
+    description: "",
     amount: "",
     date: new Date(),
+    id: "",
   });
 
   const nameChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -26,7 +27,7 @@ export const CostForm = ({ onSaveCostData }: CostFormProps) => {
     setUserInput((previousState: UserInput) => {
       return {
         ...previousState,
-        name: event.target.value,
+        description: event.target.value,
       };
     });
   };
@@ -55,14 +56,16 @@ export const CostForm = ({ onSaveCostData }: CostFormProps) => {
     const costDate: UserInput = {
       ...userInput,
       date: new Date(date),
+      id: Math.random().toString(),
     };
     onSaveCostData(costDate);
 
     setUserInput(() => {
       return {
-        name:"",
-        amount:"",
+        description: "",
+        amount: "",
         date: new Date(),
+        id: "",
       };
     });
   };
@@ -73,7 +76,7 @@ export const CostForm = ({ onSaveCostData }: CostFormProps) => {
         <div className="new-cost__control">
           <label htmlFor="">Name</label>
           <input
-            value={userInput.name}
+            value={userInput.description}
             type="text"
             onChange={nameChangeHandler}
           />

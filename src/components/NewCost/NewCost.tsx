@@ -9,10 +9,13 @@ export const NewCost = ({ onAddCost}: NewCostProps) => {
 
     const costDate = {
       ...inputConstDate,
-      id: Math.random().toString()
+
     };
+
      onAddCost(costDate);
+
   };
+
   return (
     <div className="new-cost">
       <CostForm onSaveCostData={saveCostDateHandler}></CostForm>;

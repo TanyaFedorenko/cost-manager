@@ -1,22 +1,19 @@
 import "./Costs.css";
 import { CostItem } from "../CostItem/CostItem";
-import {Card} from '../UI/Card';
-type Cost = {
-  id: string;
-  date: Date;
-  description: string;
-  amount: number;
-};
+import { Card } from "../UI/Card";
+import type { CostType } from "../NewCost/UserInput";
+
 type CostListProps = {
-  costs: Cost[];
+  costs: CostType[];
 };
 
-export const Cost = ({ costs }: CostListProps) => {
+export const Cost = (props: CostListProps) => {
   return (
     <Card className="costs">
-      {costs.map((item: Cost) => (
+      {props.costs.map((item: CostType) => (
         <CostItem
           key={item.id}
+          id={item.id}
           date={item.date}
           description={item.description}
           amount={item.amount}

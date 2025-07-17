@@ -2,14 +2,10 @@ import "./CostItem.css";
 import CostDate from "../CostDate/CostDate";
 import { Card } from "../UI/Card";
 import React, { useState } from "react";
+import type { UserInput } from "../NewCost/UserInput";
 
-type CostItemProps = {
-  date: Date;
-  description: string;
-  amount: number;
-};
 
-export const CostItem = ({ date, description, amount }: CostItemProps) => {
+export const CostItem = ({ date, description, amount }: UserInput) => {
   const [desc, setDesc] = useState<string>(description);
 
   const ChangeDescriptionHandler = () => {
