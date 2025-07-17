@@ -25,6 +25,7 @@ function App() {
   ];
   const addCostHandler = (post: UserInput) => {
     console.log(post);
+    COSTS.push(post)
  
   };
   return (
